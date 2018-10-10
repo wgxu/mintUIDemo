@@ -4,12 +4,8 @@
   </div>
 </template>
 <script>
-  import Vue from 'vue';
-  import { Picker } from 'mint-ui';
-  Vue.component(Picker.name, Picker);
-
   export  default {
-    name: 'Head',
+    name: 'Home',
     data(){
       return {}
     }

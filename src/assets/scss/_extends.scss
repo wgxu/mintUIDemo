@@ -1,0 +1,11 @@
+//global setting
+$headBackgroundColor: #e2231a;
+$headHeight: 114px;
+
+
+
+
+//gloal methods
+@function  pxToRem($px) {
+  @return $px / $fontSize * 0.5rem;
+}

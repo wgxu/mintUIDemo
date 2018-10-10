@@ -4,6 +4,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>demo1</title>
+    <script>
+      (function (d,w) {
+        const  screen = w.screen,
+          wid = screen.width > 375 ? 375 : screen.width,
+          rem = wid * 2 / 16;
+
+        function render() {
+          d.getElementsByTagName('html')[0].style.fontSize = rem + 'px';
+        }
+        render();
+        w.addEventListener('resize',render);
+      })(document,window);
+    </script>
   </head>
   <body>
     <div id="app"></div>
