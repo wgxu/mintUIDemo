@@ -1,7 +1,5 @@
 /*基础样式*/
 html, body {
-    /*height: 100%;*/
-    overflow-y: auto;
     font-family: 'Microsoft YaHei';
 }
 
