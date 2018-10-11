@@ -6,24 +6,17 @@
         <div class="cell">
           <label>用户名</label>
           <div class="cell-box">
-            <input type="text" placeholder="请输入用户名">
+            <input type="text" placeholder="请输入用户名" v-model="form.user">
           </div>
         </div>
 
         <div class="cell">
           <label>性别</label>
-          <div class="cell-box" v-text="sex" @click="openSexPick">
+          <div class="cell-box" @click="openSexPick">
+            <div class="select-box" v-text="form.sexName || '请选择性别'"></div>
           </div>
         </div>
-
-        <mt-popup v-model="showSexPick" position="bottom">
-          <mt-picker :slots="slots" @change="onValuesChange" showToolbar>
-         <div class="usi-btn-cancel" @click="popupVisible = !popupVisible">取消</div>
-         <div class="">请选择代理区域</div>
-         <div class="usi-btn-sure" @click="popupVisible = !popupVisible">确定</div>
-          </mt-picker>
-        </mt-popup>
-
+        <Select :selectParam = 'sexSelect' v-on:setPickerData="getSexPicker"></Select>
 
       </div>
     </div>
@@ -32,9 +25,10 @@
 </template>
 <script>
   import Head from '@/comonents/Head';
+  import Select from  '@/comonents/Select';
   export default {
     name: 'Form',
-    components: {Head},
+    components: {Head,Select},
     data(){
       return{
         headParam: {
@@ -42,22 +36,33 @@
           isTabPage: false,
           smallTitle: ''
         },
-        slots: [
-          {
-            values: ['2015-01', '2015-02', '2015-03', '2015-04', '2015-05', '2015-06'],
-            className: 'slot1',
-            textAlign: 'right'
-          }
-        ],
-        sex:'请选择性别',
-        showSexPick: false
+        sexSelect: {
+          values: [{
+            id: 1,
+            name: '宝马'
+          },{
+            id: 2,
+            name: '奔驰'
+          },{
+            id: 3,
+            name: '奥迪'
+          },{
+            id: 4,
+            name: '保时捷'
+          }],
+          title:'请选择性别',
+          show:false
+        },
+        form:{}
       }
     },
     methods:{
-      onValuesChange(e){
-      },
       openSexPick(){
-        this.showSexPick = true;
+        this.sexSelect.show = true;
+      },
+      getSexPicker(data) {
+        this.$set(this.form,'sexName',data.name);
+       console.log(this.form.sexName)
       }
     }
   }
@@ -94,5 +99,9 @@
   }
   .mint-popup-bottom {
     width: 100%;
+  }
+  .select-box {
+    line-height: pxToRem(60px);
+    text-align: right;
   }
 </style>
